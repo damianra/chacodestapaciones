@@ -1,0 +1,54 @@
+{% load static %} 
+{% load i18n %} 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Chaco Destapaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+
+<body>
+    <header>
+            <div class="container">
+                <div class="row justify-content-md-between">
+                    <div class="col-lg-4">
+                      <a href="{% url 'inicio' %}"><img src="{% static 'img/logo_chaco_destapaciones.jpg' %}" class="imglogo img-fluid mx-auto d-block pt-2 pb-2"/></a>
+                    </div>
+                    <div class="col-lg-4">
+                        <nav class="login text-center pt-2 pb-2">
+                            <ul>
+                            {% for r in redes %}
+                                {% if r.nombre == 'Email' %}
+                                    <li>
+                                        <a href="mailto:{{ r.link }}"></a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{{ r.link }}"></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    {% block base %}
+    {% endblock %}
+
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+</html>

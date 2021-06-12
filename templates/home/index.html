@@ -1,0 +1,157 @@
+{% extends 'plantilla.html' %}
+{% load static %} 
+{% load i18n %} 
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="imgheader">
+            <div class="tituloIndex pt-5">
+                <h2 class="pt-5">Nos dedicamos exclusivamente a destapaciones de cañerias</h2>
+                <h3>Atendemos particulares, viviendas, consorcios, pymes, etc.</h3>
+            </div>
+        
+    </div>
+
+    <h3 class="res text-center mt-5">Somos de Resistencia Chaco (consultar alrededores)</h3>
+
+
+    <div class="container mb-4 mt-4">
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card border-primary mb-3">
+                    <div class="cardheader card-header">
+                    Servicios
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <ul>
+                                <li>Destapaciones de cañerias</li>
+                                <li>Destapaciones de cloacas</li>
+                                <li>Destapaciones de plubiales</li>
+                                <li>Destapaciones de lavaderos</li>
+                                <li>Destapaciones de baños</li>
+                                <li>Destapaciones de cocinas</li>
+                                <li>Destapaciones de columnas</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-primary mb-3">
+                    <div class="cardheader card-header">
+                    Atendemos
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <ul>
+                                <li>Casas particulares</li>
+                                <li>Consorcios</li>
+                                <li>Locales</li>
+                                <li>Pymes</li>
+                                <li>Supermercados</li>
+                                <li>Fabricas</li>
+                                <li>etc.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-primary mb-3">
+                    <div class="cardheader card-header">
+                    Personal
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Contamos con un excelente personal capacitado para realizar diferentes tareas.<br>
+                        También preparamos a nuestro personal siguiendo protocolos de protección para evitar contagios (COVID19) asi para cuidarnos y cuidar a nuestros clientes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        
+        </div>
+
+    </div>
+
+    <div class="container pt-3 pb-3 mt-4">
+        <div class="quienes row justify-content-center">
+            <div class="imgquien col-md-6">
+
+            </div>
+            <div class="txtquien col-md-6 p-4 text-center">
+                <a href="{% url 'quienes-somos' %}"><h3 class="qui mt-3">Quienes somos?</h3></a>
+                <p>Desde hace años trabajamos en destapaciones de cañerias con maquina en Resistencia.</p>
+                <p>Somos responsables con nuestro trabajo tenemos experiencia en destapaciones en viviendas, concorcios, pymes, etc.</p>
+                <p>No te quedes con la duda y hacenos tu consulta.</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mt-5 mb-5">
+		<div class="row">
+
+            <div class="contact col-lg-6 pt-4 pb-4">
+                <h2>Estamos atentos a nuestros diferentes puntos de contacto:</h2>
+                <ul>
+                    {% for r in redes %}
+                        {% if r.nombre == 'Email' %}
+                            <li class="pt-4">{{ r.nombre }}: <a href="mailto:{{ r.link }}">{{ r.link }}</a></li>
+                        {% else %}
+                            <li class="pt-4">{{ r.nombre }}: <a href="{{ r.link }}">{{ r.link }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <p class="pt-5">Nos encontramos en Edison al 1900 Resistencia Chaco.</p>
+            </div>
+
+			<div class="col-lg-6 pt-4 pb-4">
+				<form>
+				{% csrf_token %}
+					{{ form | crispy }}
+					<a class="btn btn-primary" style="color: #fff;" id="send" data-toggle="modal" data-target="#responseModal">Enviar</a>
+				</form>
+			</div>
+
+            
+
+		</div>
+	</main>
+
+    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseLabel">Info</h5>
+                </div>
+                    <div class="modal-body" id="modalBody">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mb-4 mt-4">
+        <div class="card text-white bg-danger">
+            <div class="card-header">EMERGENCIAS!</div>
+            <div class="card-body text-white text-center">
+                <h4 class="card-title">Atendemos emergencias destapaciones</h4>
+                <p class="card-text">Si tiene una emergencia no dude en contactarnos y resolveremos su problema</p>
+                <p>Telefono/Whatsapp de contacto: 3624611120</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/ajax_form.js' %}"></script>
+{% endblock scripts %}

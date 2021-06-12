@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load i18n %} 
+
+{% block base %}
+  
+    <div class="navegacion sticky-top">
+        <nav class="nav-principal navbar navbar-expand-md navbar-dark bg-faded">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_principal" aria-label="Show Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="#" class="navbar-brand d-md-none d-lg-none">ChacoDestapaciones</a>
+    
+            <div class="container">
+                <div class="collapse navbar-collapse w-100" id="nav_principal">
+                    <ul class="nav nav-justified w-100 flex-column flex-sm-row">
+                        <li class="nav-item">
+                            <a href="{% url 'inicio' %}" class="nav-link">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'servicios' %}" class="nav-link">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'quienes-somos' %}" class="nav-link">Quienes somos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contacto' %}" class="nav-link">Contacto</a>
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <div class="footer">
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h3>Horarios de atención:</h3>
+                    <p>Lunes a Sabados de 9:00 a 20:00 hs</p>
+                    <p>Domingos y feriados CERRADO.</p>
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h3>Servicios:</h3>
+                    <ul>
+                        <li>Destapaciones de cañerias</li>
+                        <li>Destapaciones de cloacas</li>
+                        <li>Destapaciones de plubiales</li>
+                        <li>Destapaciones de lavaderos</li>
+                        <li>Destapaciones de baños</li>
+                        <li>Destapaciones de cocinas</li>
+                        <li>Destapaciones de columnas</li>
+                    </ul>
+                    
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h3>Contacto:</h3>
+                    <nav class="contacto pt-2 pb-2">
+                        <ul>
+                            {% for r in redes %}
+                                {% if r.nombre == 'Email' %}
+                                    <li>
+                                        <a href="mailto:{{ r.link }}"></a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{{ r.link }}"></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="copy text-center pb-2 mt-4">
+            <p class="text-center">Copyright 2021 © <a href="{% url 'inicio' %}" style="color: #fff">Chaco Destapaciones</a></p>
+        </div>
+    </div>
+
+{% endblock %}
