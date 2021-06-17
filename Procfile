@@ -1,1 +1,1 @@
-web: gunicorn chacodestapaciones.wsgi --log-file -
+web: gunicorn chacodestapaciones.wsgi
